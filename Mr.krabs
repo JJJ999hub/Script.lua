@@ -94,8 +94,8 @@ MenuFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MenuFrame.BorderSizePixel = 0
 MenuFrame.ClipsDescendants = true 
 
-local tamanhoMenu = UDim2.new(0, 360, 0, 160)
-local posicaoMenuCentro = UDim2.new(0.5, -180, 0.5, -80)
+local tamanhoMenu = UDim2.new(0, 360, 0, 170)
+local posicaoMenuCentro = UDim2.new(0.5, -180, 0.5, -85)
 local posicaoBolinha = UDim2.new(1, -85, 1, -85)
 
 MenuFrame.Size = UDim2.new(0, 0, 0, 0)
@@ -125,7 +125,7 @@ FiltroEscuro.BorderSizePixel = 0
 local BarraArrastar = Instance.new("Frame")
 BarraArrastar.Name = "BarraArrastar"
 BarraArrastar.Parent = MenuFrame
-BarraArrastar.Size = UDim2.new(1, 0, 0, 35)
+BarraArrastar.Size = UDim2.new(1, 0, 0, 45)
 BarraArrastar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 BarraArrastar.BackgroundTransparency = 0.5
 BarraArrastar.BorderSizePixel = 0
@@ -137,15 +137,27 @@ BarraCorner.Parent = BarraArrastar
 
 local Titulo = Instance.new("TextLabel")
 Titulo.Parent = BarraArrastar
-Titulo.Size = UDim2.new(1, -20, 1, 0)
-Titulo.Position = UDim2.new(0, 15, 0, 0)
-Titulo.Text = "Mr.krabs"
+Titulo.Size = UDim2.new(1, -50, 0, 25)
+Titulo.Position = UDim2.new(0, 15, 0, 2)
+Titulo.Text = "MENU DE CONTROLE"
 Titulo.TextColor3 = Color3.fromRGB(255, 255, 255)
 Titulo.TextXAlignment = Enum.TextXAlignment.Left
 Titulo.Font = Enum.Font.SourceSansBold
-Titulo.TextSize = 16
+Titulo.TextSize = 15
 Titulo.BackgroundTransparency = 1
 Titulo.ZIndex = 3
+
+local CreditoMenu = Instance.new("TextLabel")
+CreditoMenu.Parent = BarraArrastar
+CreditoMenu.Size = UDim2.new(1, -50, 0, 18)
+CreditoMenu.Position = UDim2.new(0, 15, 0, 23)
+CreditoMenu.Text = "By: Syperkid43"
+CreditoMenu.TextColor3 = Color3.fromRGB(200, 200, 200)
+CreditoMenu.TextXAlignment = Enum.TextXAlignment.Left
+CreditoMenu.Font = Enum.Font.SourceSansItalic
+CreditoMenu.TextSize = 12
+CreditoMenu.BackgroundTransparency = 1
+CreditoMenu.ZIndex = 3
 
 local menuAberto = false
 local executandoTween = false
@@ -208,8 +220,8 @@ end)
 
 local ContainerBotoes = Instance.new("Frame")
 ContainerBotoes.Parent = MenuFrame
-ContainerBotoes.Size = UDim2.new(1, -20, 1, -55)
-ContainerBotoes.Position = UDim2.new(0, 10, 0, 45)
+ContainerBotoes.Size = UDim2.new(1, -20, 1, -65)
+ContainerBotoes.Position = UDim2.new(0, 10, 0, 55)
 ContainerBotoes.BackgroundTransparency = 1
 ContainerBotoes.ZIndex = 2
 
@@ -310,19 +322,18 @@ CriarBotao("💬 Mensagem", function()
 		local hg = Instance.new("ScreenGui", playerGui)
 		hg.Name = "HackedMessageGui"
 		
-		-- Faixa preta clássica estilo Admin que cruza a tela toda horizontalmente no topo
 		local faixaPreta = Instance.new("Frame", hg)
-		faixaPreta.Size = UDim2.new(1, 0, 0, 50) -- Altura perfeita estilo barra de anúncio
-		faixaPreta.Position = UDim2.new(0, 0, 0, 0) -- Colada no topo absoluto da tela
+		faixaPreta.Size = UDim2.new(1, 0, 0, 50) 
+		faixaPreta.Position = UDim2.new(0, 0, 0, 0) 
 		faixaPreta.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		faixaPreta.BackgroundTransparency = 0.3 -- Semi-transparente clássica
+		faixaPreta.BackgroundTransparency = 0.3 
 		faixaPreta.BorderSizePixel = 0
 		
 		local lbl = Instance.new("TextLabel", faixaPreta)
 		lbl.Size = UDim2.new(1, 0, 1, 0)
 		lbl.BackgroundTransparency = 1
 		lbl.Text = "The game was hacked.  by: syperkid43"
-		lbl.TextColor3 = Color3.fromRGB(255, 0, 0)
+		lbl.TextColor3 = Color3.fromRGB(255, 255, 255)
 		lbl.Font = Enum.Font.SourceSansBold
 		lbl.TextSize = 24
 		lbl.TextStrokeTransparency = 0
