@@ -1,0 +1,335 @@
+local antigoGui = game:GetService("CoreGui"):FindFirstChild("MenuExpansivelGui") or game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui"):FindFirstChild("MenuExpansivelGui")
+if antigoGui then antigoGui:Destroy() end
+
+local antigoLink = game:GetService("Lighting"):FindFirstChild("MenuLinkData")
+if antigoLink then antigoLink:Destroy() end
+
+local pastaLink = Instance.new("Configuration")
+pastaLink.Name = "MenuLinkData"
+pastaLink.Parent = game:GetService("Lighting")
+
+local idImg = Instance.new("StringValue", pastaLink)
+idImg.Name = "ID_IMAGEM"
+idImg.Value = "rbxassetid://123423640976763"
+
+local idAud = Instance.new("StringValue", pastaLink)
+idAud.Name = "ID_AUDIO"
+idAud.Value = "rbxassetid://4887063009"
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MenuExpansivelGui"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+local o1 = Instance.new("ObjectValue", pastaLink)
+o1.Name = "ScreenGui"
+o1.Value = ScreenGui
+
+local ContainerImagens = Instance.new("Frame")
+ContainerImagens.Name = "ContainerImagens"
+ContainerImagens.Parent = ScreenGui
+ContainerImagens.Size = UDim2.new(0, 100, 0, 100)
+ContainerImagens.Position = UDim2.new(1, -120, 1, -120) 
+ContainerImagens.BackgroundTransparency = 1
+ContainerImagens.ZIndex = 3
+
+local BolaPrincipal = Instance.new("ImageButton")
+BolaPrincipal.Name = "BolaPrincipal"
+BolaPrincipal.Parent = ContainerImagens
+BolaPrincipal.Size = UDim2.new(0, 70, 0, 70)
+BolaPrincipal.Position = UDim2.new(0.5, -35, 0.5, -35)
+BolaPrincipal.Image = idImg.Value
+BolaPrincipal.ScaleType = Enum.ScaleType.Crop
+BolaPrincipal.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+BolaPrincipal.BorderSizePixel = 0
+BolaPrincipal.ZIndex = 5
+
+local o2 = Instance.new("ObjectValue", pastaLink)
+o2.Name = "BolaPrincipal"
+o2.Value = BolaPrincipal
+
+local CortarBola1 = Instance.new("UICorner")
+CortarBola1.CornerRadius = UDim.new(1, 0)
+CortarBola1.Parent = BolaPrincipal
+
+local BolaOrbital = Instance.new("ImageLabel")
+BolaOrbital.Name = "BolaOrbital"
+BolaOrbital.Parent = ContainerImagens
+BolaOrbital.Size = UDim2.new(0, 25, 0, 25)
+BolaOrbital.Image = idImg.Value
+BolaOrbital.ScaleType = Enum.ScaleType.Crop
+BolaOrbital.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+BolaOrbital.BorderSizePixel = 0
+BolaOrbital.ZIndex = 4
+
+local CortarBola2 = Instance.new("UICorner")
+CortarBola2.CornerRadius = UDim.new(1, 0)
+CortarBola2.Parent = BolaOrbital
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	local tempo = tick() * 3
+	local x = math.cos(tempo) * 45
+	local y = math.sin(tempo) * 45
+	local xOffset = x - 12.5
+	local yOffset = y - 12.5
+	BolaOrbital.Position = UDim2.new(0.5, xOffset, 0.5, yOffset)
+	BolaOrbital.Rotation = tempo * 50 
+end)
+local pastaLink = game:GetService("Lighting"):WaitForChild("MenuLinkData", 5)
+local ID_IMAGEM = pastaLink.ID_IMAGEM.Value
+local ID_AUDIO = pastaLink.ID_AUDIO.Value
+local ScreenGui = pastaLink.ScreenGui.Value
+local BolaPrincipal = pastaLink.BolaPrincipal.Value
+
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Lighting = game:GetService("Lighting")
+local Players = game:GetService("Players")
+
+local MenuFrame = Instance.new("Frame")
+MenuFrame.Name = "MenuFrame"
+MenuFrame.Parent = ScreenGui
+MenuFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MenuFrame.BorderSizePixel = 0
+MenuFrame.ClipsDescendants = true 
+
+local tamanhoMenu = UDim2.new(0, 360, 0, 160)
+local posicaoMenuCentro = UDim2.new(0.5, -180, 0.5, -80)
+local posicaoBolinha = UDim2.new(1, -85, 1, -85)
+
+MenuFrame.Size = UDim2.new(0, 0, 0, 0)
+MenuFrame.Position = posicaoBolinha
+MenuFrame.BackgroundTransparency = 1
+MenuFrame.Visible = true
+
+local MenuCorner = Instance.new("UICorner")
+MenuCorner.CornerRadius = UDim.new(0, 12)
+MenuCorner.Parent = MenuFrame
+
+local ImagemFundoMenu = Instance.new("ImageLabel")
+ImagemFundoMenu.Parent = MenuFrame
+ImagemFundoMenu.Size = UDim2.new(1, 0, 1, 0)
+ImagemFundoMenu.Image = ID_IMAGEM
+ImagemFundoMenu.ScaleType = Enum.ScaleType.Crop
+ImagemFundoMenu.BorderSizePixel = 0
+ImagemFundoMenu.ZIndex = 0
+
+local FiltroEscuro = Instance.new("Frame")
+FiltroEscuro.Parent = ImagemFundoMenu
+FiltroEscuro.Size = UDim2.new(1, 0, 1, 0)
+FiltroEscuro.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+FiltroEscuro.BackgroundTransparency = 0.4
+FiltroEscuro.BorderSizePixel = 0
+
+local BarraArrastar = Instance.new("Frame")
+BarraArrastar.Name = "BarraArrastar"
+BarraArrastar.Parent = MenuFrame
+BarraArrastar.Size = UDim2.new(1, 0, 0, 35)
+BarraArrastar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+BarraArrastar.BackgroundTransparency = 0.5
+BarraArrastar.BorderSizePixel = 0
+BarraArrastar.ZIndex = 2
+
+local BarraCorner = Instance.new("UICorner")
+BarraCorner.CornerRadius = UDim.new(0, 12)
+BarraCorner.Parent = BarraArrastar
+
+local Titulo = Instance.new("TextLabel")
+Titulo.Parent = BarraArrastar
+Titulo.Size = UDim2.new(1, -20, 1, 0)
+Titulo.Position = UDim2.new(0, 15, 0, 0)
+Titulo.Text = "MENU DE CONTROLE"
+Titulo.TextColor3 = Color3.fromRGB(255, 255, 255)
+Titulo.TextXAlignment = Enum.TextXAlignment.Left
+Titulo.Font = Enum.Font.SourceSansBold
+Titulo.TextSize = 16
+Titulo.BackgroundTransparency = 1
+Titulo.ZIndex = 3
+
+local menuAberto = false
+local executandoTween = false
+
+local function alternarMenu()
+	if executandoTween then return end 
+	executandoTween = true
+	local infoTween = TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+	
+	if not menuAberto then
+		MenuFrame.Position = posicaoBolinha
+		MenuFrame.Size = UDim2.new(0, 0, 0, 0)
+		local tweenPos = TweenService:Create(MenuFrame, infoTween, {Position = posicaoMenuCentro, BackgroundTransparency = 0})
+		local tweenSize = TweenService:Create(MenuFrame, infoTween, {Size = tamanhoMenu})
+		tweenPos:Play()
+		tweenSize:Play()
+		tweenSize.Completed:Connect(function()
+			menuAberto = true
+			executandoTween = false
+		end)
+	else
+		local tweenPos = TweenService:Create(MenuFrame, infoTween, {Position = posicaoBolinha, BackgroundTransparency = 1})
+		local tweenSize = TweenService:Create(MenuFrame, infoTween, {Size = UDim2.new(0, 0, 0, 0)})
+		tweenPos:Play()
+		tweenSize:Play()
+		tweenSize.Completed:Connect(function()
+			menuAberto = false
+			executandoTween = false
+		end)
+	end
+end
+
+BolaPrincipal.MouseButton1Click:Connect(alternarMenu)
+
+task.spawn(function()
+	task.wait(0.2)
+	alternarMenu()
+end)
+
+local arrastando, posicaoInicial, posJanela
+BarraArrastar.InputBegan:Connect(function(input)
+	if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and menuAberto then
+		arrastando = true
+		posicaoInicial = input.Position
+		posJanela = MenuFrame.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then arrastando = false end
+		end)
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if arrastando and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - posicaoInicial
+		local novaPos = UDim2.new(posJanela.X.Scale, posJanela.X.Offset + delta.X, posJanela.Y.Scale, posJanela.Y.Offset + delta.Y)
+		MenuFrame.Position = novaPos
+		posicaoMenuCentro = novaPos 
+	end
+end)
+
+local ContainerBotoes = Instance.new("Frame")
+ContainerBotoes.Parent = MenuFrame
+ContainerBotoes.Size = UDim2.new(1, -20, 1, -55)
+ContainerBotoes.Position = UDim2.new(0, 10, 0, 45)
+ContainerBotoes.BackgroundTransparency = 1
+ContainerBotoes.ZIndex = 2
+
+local Grid = Instance.new("UIGridLayout")
+Grid.Parent = ContainerBotoes
+Grid.CellSize = UDim2.new(0, 105, 0, 45)
+Grid.CellPadding = UDim2.new(0, 12, 0, 12)
+Grid.SortOrder = Enum.SortOrder.LayoutOrder
+
+local function CriarBotao(texto, funcaoClique)
+	local NovoBotao = Instance.new("TextButton")
+	NovoBotao.Parent = ContainerBotoes
+	NovoBotao.Text = texto
+	NovoBotao.TextColor3 = Color3.fromRGB(255, 255, 255)
+	NovoBotao.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	NovoBotao.BackgroundTransparency = 0.15
+	NovoBotao.Font = Enum.Font.SourceSansBold
+	NovoBotao.TextSize = 14
+	NovoBotao.ZIndex = 3
+	local BotaoCorner = Instance.new("UICorner")
+	BotaoCorner.CornerRadius = UDim.new(0, 6)
+	BotaoCorner.Parent = NovoBotao
+	NovoBotao.MouseButton1Click:Connect(funcaoClique)
+	return NovoBotao
+end
+
+local som = Instance.new("Sound")
+som.SoundId = ID_AUDIO
+som.Volume = 0.8
+som.Looped = true
+som.Parent = MenuFrame
+
+CriarBotao("🎵 Som", function()
+	if som.IsPlaying then som:Stop() else som:Play() end
+end)
+
+CriarBotao("💥 Decal", function()
+	local function aplicarSpam(objeto)
+		for _, filho in pairs(objeto:GetChildren()) do
+			if filho:IsA("BasePart") then
+				local faces = {Enum.NormalId.Top, Enum.NormalId.Bottom, Enum.NormalId.Left, Enum.NormalId.Right, Enum.NormalId.Front, Enum.NormalId.Back}
+				for _, face in pairs(faces) do
+					local decal = Instance.new("Decal")
+					decal.Texture = ID_IMAGEM
+					decal.Face = face
+					decal.Parent = filho
+				end
+			end
+			aplicarSpam(filho)
+		end
+	end
+	aplicarSpam(game.Workspace)
+end)
+
+CriarBotao("🌌 Skybox", function()
+	for _, obj in pairs(Lighting:GetChildren()) do
+		if obj:IsA("Sky") then obj:Destroy() end
+	end
+	local novoCeu = Instance.new("Sky")
+	novoCeu.SkyboxBk = ID_IMAGEM
+	novoCeu.SkyboxDn = ID_IMAGEM
+	novoCeu.SkyboxFt = ID_IMAGEM
+	novoCeu.SkyboxLf = ID_IMAGEM
+	novoCeu.SkyboxRt = ID_IMAGEM
+	novoCeu.SkyboxUp = ID_IMAGEM
+	novoCeu.CelestialBodiesShown = false
+	novoCeu.Parent = Lighting
+end)
+
+CriarBotao("✨ Partículas", function()
+	local function prenderParticulas(character)
+		local root = character:WaitForChild("HumanoidRootPart", 5)
+		if root and not root:FindFirstChild("ImagensEmissao") then
+			local emitter = Instance.new("ParticleEmitter")
+			emitter.Name = "ImagensEmissao"
+			emitter.Texture = ID_IMAGEM
+			emitter.Lifetime = NumberRange.new(1.5, 3)
+			emitter.Rate = 25
+			emitter.Speed = NumberRange.new(5, 10)
+			emitter.VelocityInheritance = 0.5
+			emitter.SpreadAngle = Vector2.new(45, 45)
+			emitter.Size = NumberSequence.new({
+				NumberSequenceKeypoint.new(0, 1.5),
+				NumberSequenceKeypoint.new(1, 0)
+			})
+			emitter.Parent = root
+		end
+	end
+	for _, player in pairs(Players:GetPlayers()) do
+		if player.Character then prenderParticulas(player.Character) end
+		player.CharacterAdded:Connect(prenderParticulas)
+	end
+end)
+
+CriarBotao("💬 Mensagem", function()
+	local function criarAviso(playerGui)
+		if playerGui:FindFirstChild("HackedMessageGui") then playerGui.HackedMessageGui:Destroy() end
+		local hg = Instance.new("ScreenGui", playerGui)
+		hg.Name = "HackedMessageGui"
+		
+		-- Faixa preta clássica estilo Admin que cruza a tela toda horizontalmente no topo
+		local faixaPreta = Instance.new("Frame", hg)
+		faixaPreta.Size = UDim2.new(1, 0, 0, 50) -- Altura perfeita estilo barra de anúncio
+		faixaPreta.Position = UDim2.new(0, 0, 0, 0) -- Colada no topo absoluto da tela
+		faixaPreta.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		faixaPreta.BackgroundTransparency = 0.3 -- Semi-transparente clássica
+		faixaPreta.BorderSizePixel = 0
+		
+		local lbl = Instance.new("TextLabel", faixaPreta)
+		lbl.Size = UDim2.new(1, 0, 1, 0)
+		lbl.BackgroundTransparency = 1
+		lbl.Text = "The game was hacked.  by: syperkid43"
+		lbl.TextColor3 = Color3.fromRGB(255, 0, 0)
+		lbl.Font = Enum.Font.SourceSansBold
+		lbl.TextSize = 24
+		lbl.TextStrokeTransparency = 0
+		lbl.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	end
+	for _, p in pairs(Players:GetPlayers()) do
+		local pgui = p:FindFirstChild("PlayerGui")
+		if pgui then criarAviso(pgui) end
+	end
+end)
